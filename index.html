@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Pengun – El videojuego (por PENGUN LOVESTORE)</title>
+    <title>PengunLovers – Agencia de software</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap"
         rel="stylesheet">
     <style>
@@ -80,7 +80,7 @@
         }
 
         h1 {
-            font-size: clamp(2.6rem, 8vw, 5rem)
+            font-size: clamp(2.6rem, 8vw, 4.8rem)
         }
 
         h2 {
@@ -129,13 +129,24 @@
             white-space: nowrap;
             text-decoration: none;
             color: var(--ink);
-            padding: .3rem .6rem;
+            padding: .3rem .7rem;
             border-radius: 8px;
             font-size: .95rem
         }
 
         header a:hover {
             background: var(--line)
+        }
+
+        header a[aria-current] {
+            background: var(--ink);
+            color: var(--bg)
+        }
+
+        section,
+        footer {
+            position: relative;
+            z-index: 1
         }
 
         section {
@@ -194,20 +205,17 @@
             grid-template-columns: 1.1fr 1fr;
             gap: 2rem;
             align-items: center;
-            padding-top: 2.5rem
-        }
-
-        .stage {
-            background: linear-gradient(#9fd8ee, #e5f6fc);
-            border-radius: 22px;
-            padding: 1rem;
-            text-align: center;
-            color: #12203A
+            min-height: 80vh
         }
 
         .lead {
             font-size: 1.15rem;
             color: var(--mut)
+        }
+
+        .kick {
+            color: var(--tealx);
+            font-weight: 500
         }
 
         .row {
@@ -220,66 +228,63 @@
             flex: 1 1 150px
         }
 
-        .cells {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: .5rem;
-            max-width: 270px;
-            margin: .6rem auto
+        .hide {
+            display: none !important
         }
 
-        .cell {
-            aspect-ratio: 1;
-            border-radius: 14px;
-            border: 2px solid #7cc3dd;
-            background: #fff8;
-            font-size: 2rem;
-            cursor: pointer
-        }
-
-        .opt {
-            display: block;
-            border: 2px solid var(--line);
-            border-radius: 14px;
-            padding: 1rem;
-            margin: .5rem 0;
-            cursor: pointer;
-            background: var(--card)
-        }
-
-        .opt:has(input:checked) {
-            border-color: var(--teal)
-        }
-
-        .tot {
-            width: 100%;
-            border-collapse: collapse
-        }
-
-        .tot td {
-            padding: .35rem 0
-        }
-
-        .tot td:last-child {
-            text-align: right
-        }
-
-        .tot tr:last-child {
-            font: 700 1.2rem Poppins;
-            border-top: 2px solid var(--ink)
-        }
-
-        .wall {
-            height: 150px;
+        .gate {
+            position: fixed;
+            inset: 0;
             overflow: auto;
-            font-size: .6rem;
-            line-height: 1.25;
-            color: var(--mut);
-            text-align: justify;
+            background: var(--bg);
+            z-index: 30;
+            max-width: none;
+            margin: 0;
+            padding: calc(2rem + env(safe-area-inset-top, 0px)) max(1.2rem, calc((100% - 1020px)/2)) 2rem
+        }
+
+        #snow {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 40
+        }
+
+        label input[type=email],
+        label input[type=password] {
+            display: block;
+            width: 100%;
             padding: .7rem;
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            margin-top: .6rem
+            border: 2px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--ink);
+            font: inherit;
+            margin: .3rem 0 .8rem
+        }
+
+        .sw {
+            display: flex;
+            gap: .8rem;
+            align-items: center;
+            margin: .6rem 0;
+            font-weight: 500
+        }
+
+        .sw input {
+            width: 1.2rem;
+            height: 1.2rem;
+            accent-color: var(--teal)
+        }
+
+        details {
+            margin: .5rem 0
+        }
+
+        summary {
+            cursor: pointer
         }
 
         .sum {
@@ -290,15 +295,82 @@
             margin: .4rem 0
         }
 
-        .hide {
-            display: none !important
+        .quote {
+            border-left: 6px solid var(--coral);
+            padding: .3rem 1.2rem;
+            font: 600 1.35rem/1.3 Poppins;
+            margin: 1.2rem 0
+        }
+
+        .t {
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        .t td,
+        .t th {
+            padding: .5rem .7rem;
+            border-bottom: 1px solid var(--line);
+            text-align: left
+        }
+
+        .t td:last-child {
+            color: var(--tealx);
+            font-weight: 500
+        }
+
+        .rule {
+            border-top: 6px solid var(--teal)
+        }
+
+        .rule:nth-child(2) {
+            border-color: var(--coral)
+        }
+
+        .rule:nth-child(3) {
+            border-color: var(--ink)
+        }
+
+        .rule .p {
+            font-size: 1.2rem
+        }
+
+        .rule small {
+            display: block;
+            color: var(--mut);
+            margin: .6rem 0
+        }
+
+        .tabs {
+            display: flex;
+            gap: .5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap
+        }
+
+        .tab {
+            font: 600 .95rem Poppins;
+            padding: .6rem 1rem;
+            border-radius: 999px;
+            border: 2px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            cursor: pointer
+        }
+
+        .tab[aria-selected="true"] {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink)
         }
 
         .bad {
             background: #2a1a45;
             color: #fff;
             border-radius: 16px;
-            padding: 1.3rem
+            padding: 1.3rem;
+            max-width: 440px;
+            margin: 0 auto
         }
 
         .bad .go {
@@ -324,6 +396,12 @@
             cursor: pointer
         }
 
+        .good {
+            max-width: 440px;
+            margin: 0 auto;
+            border: 2px solid var(--teal)
+        }
+
         .tag {
             cursor: help;
             border-bottom: 2px dotted var(--warn)
@@ -345,64 +423,16 @@
             min-height: 3rem
         }
 
-        .sw {
-            display: flex;
-            gap: .8rem;
-            align-items: center;
-            margin: .6rem 0;
-            font-weight: 500
-        }
-
-        .sw input {
-            width: 1.2rem;
-            height: 1.2rem;
-            accent-color: var(--teal)
-        }
-
-        .rule {
-            border-top: 6px solid var(--teal)
-        }
-
-        .rule:nth-child(2) {
-            border-color: var(--coral)
-        }
-
-        .rule:nth-child(3) {
-            border-color: var(--ink)
-        }
-
-        .rule .p {
-            font-size: 1.2rem
-        }
-
-        .rule small {
-            display: block;
+        .wall {
+            height: 230px;
+            overflow: auto;
+            font-size: .6rem;
+            line-height: 1.25;
             color: var(--mut);
-            margin: .6rem 0
-        }
-
-        .quote {
-            border-left: 6px solid var(--coral);
-            padding: .3rem 1.2rem;
-            font: 600 1.35rem/1.3 Poppins;
-            margin: 1.2rem 0
-        }
-
-        table.t {
-            border-collapse: collapse;
-            width: 100%
-        }
-
-        .t td,
-        .t th {
-            padding: .5rem .7rem;
-            border-bottom: 1px solid var(--line);
-            text-align: left
-        }
-
-        .t td:last-child {
-            color: var(--tealx);
-            font-weight: 500
+            text-align: justify;
+            padding: .7rem;
+            border: 1px solid var(--line);
+            border-radius: 12px
         }
 
         .claim {
@@ -447,6 +477,20 @@
 
         .lens {
             animation: peek 3s ease-in-out infinite
+        }
+
+        .contract {
+            border: 2px solid var(--ink);
+            border-radius: 8px;
+            padding: 1.4rem
+        }
+
+        .contract h3 {
+            color: var(--tealx)
+        }
+
+        .contract li {
+            margin: .3rem 0
         }
 
         .flow {
@@ -495,14 +539,62 @@
             margin: 0
         }
 
-        .contract {
-            border: 2px solid var(--ink);
-            border-radius: 8px;
-            padding: 1.3rem
+        .stage {
+            background: linear-gradient(#9fd8ee, #e5f6fc);
+            border-radius: 22px;
+            padding: 1rem;
+            text-align: center;
+            color: #12203A
         }
 
-        .contract li {
-            margin: .3rem 0
+        .cells {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .5rem;
+            max-width: 270px;
+            margin: .6rem auto
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            border-radius: 14px;
+            border: 2px solid #7cc3dd;
+            background: #fff8;
+            font: 700 1.2rem Poppins;
+            color: #12203A;
+            cursor: pointer
+        }
+
+        .opt {
+            display: block;
+            border: 2px solid var(--line);
+            border-radius: 14px;
+            padding: 1rem;
+            margin: .5rem 0;
+            cursor: pointer;
+            background: var(--card)
+        }
+
+        .opt:has(input:checked) {
+            border-color: var(--teal)
+        }
+
+        .tot {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .tot td {
+            padding: .35rem 0
+        }
+
+        .tot td:last-child {
+            text-align: right
+        }
+
+        .tot tr:last-child {
+            font: 700 1.2rem Poppins;
+            border-top: 2px solid var(--ink)
         }
 
         footer {
@@ -514,63 +606,15 @@
             border-radius: 60% 60% 0 0/30px 30px 0 0
         }
 
-        section,
-        footer {
-            position: relative;
-            z-index: 1
-        }
-
-        #snow {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 40
-        }
-
-        .gate {
-            position: fixed;
-            inset: 0;
-            overflow: auto;
-            background: var(--bg);
-            z-index: 30;
-            max-width: none;
-            margin: 0;
-            padding: calc(2rem + env(safe-area-inset-top, 0px)) max(1.2rem, calc((100% - 1020px)/2)) 2rem
-        }
-
-        header a[aria-current] {
-            background: var(--ink);
-            color: var(--bg)
-        }
-
-        label input[type=email],
-        label input[type=password] {
-            display: block;
-            width: 100%;
-            padding: .7rem;
-            border: 2px solid var(--line);
-            border-radius: 10px;
-            background: var(--bg);
-            color: var(--ink);
-            font: inherit;
-            margin: .3rem 0 .8rem
-        }
-
-        details {
-            margin: .5rem 0
-        }
-
-        summary {
-            cursor: pointer
-        }
-
         @media(max-width:720px) {
 
             .hero,
             .two {
                 grid-template-columns: 1fr
+            }
+
+            .hero {
+                min-height: auto
             }
         }
 
@@ -584,141 +628,101 @@
 </head>
 
 <body>
-    <header><b>🐧 PENGUN</b><a href="#juego">Inicio</a><a href="#comprar">Tienda</a><a href="#nosotros">Nosotros</a><a
-            href="#promesa">Mi panel</a><a href="#ia">IA</a><a href="#crisis">Transparencia</a><button class="btn alt"
-            id="who" style="padding:.3rem .8rem;font-size:.85rem">Entrar</button></header>
+    <header><b>PengunLovers</b><a href="#inicio">Quiénes somos</a><a href="#pilares">Pilares</a><a
+            href="#promesa">Promesa</a><a href="#crisis">Plan de crisis</a><a href="#tienda">Pengun, el juego</a><button
+            class="btn alt" id="who" style="padding:.3rem .8rem;font-size:.85rem">Entrar</button></header>
 
-    <section class="hero" id="juego" data-v="inicio">
-        <div>
-            <h1>Pengun</h1>
-            <p class="lead">Un pingüino, un iceberg que se derrite y 40 niveles tranquilos. Un solo pago, sin
-                micropagos, sin cajas sorpresa y sin energía que se recarga.</p>
-            <p class="p" style="font-size:1.6rem">$199 MXN <small style="font:400 .9rem Inter;color:var(--mut)">precio
-                    final, IVA incluido</small></p>
-            <div class="row"><a class="btn" href="#comprar">Comprar Pengun</a><a class="btn alt" href="#demo">Probar la
-                    demo gratis</a></div>
-            <p style="font-size:.9rem;color:var(--mut)">Reembolso en un clic durante 14 días.</p>
+    <section id="cuenta" class="gate" data-v="gate">
+        <h2>Bienvenido a PengunLovers</h2>
+        <p class="lead" style="margin-bottom:1.2rem">Antes de entrar, esto es lo que necesitas saber. Puedes crear una
+            cuenta o entrar sin ella: tú decides.</p>
+        <div class="two">
+            <div class="card">
+                <h3>Entrar o crear cuenta</h3>
+                <p style="color:var(--mut)">Solo pedimos lo necesario: un correo y una contraseña.</p>
+                <label>Correo<input id="em" type="email" autocomplete="email"></label>
+                <label>Contraseña<input id="pw" type="password" autocomplete="current-password"></label>
+                <label class="sw"><input type="checkbox" id="tc"> Leí el resumen y acepto los términos</label>
+                <label class="sw"><input type="checkbox"> Quiero novedades por correo (opcional)</label>
+                <div class="row"><button class="btn" id="login">Crear cuenta o entrar</button><button class="btn alt"
+                        id="guest">Seguir sin cuenta</button></div>
+                <p id="lmsg" aria-live="polite" style="min-height:1.5rem;color:var(--tealx)"></p>
+            </div>
+            <div class="card">
+                <h3>Políticas en lenguaje humano</h3>
+                <details open>
+                    <summary><b>Privacidad</b></summary>
+                    <ul class="sum">
+                        <li>Guardamos tu correo y tu partida. Nada más.</li>
+                        <li>No vendemos ni compartimos tus datos.</li>
+                        <li>Los descargas o borras en un clic.</li>
+                    </ul>
+                </details>
+                <details>
+                    <summary><b>Cookies</b></summary>
+                    <ul class="sum">
+                        <li>Solo las necesarias para mantener tu sesión.</li>
+                        <li>Sin rastreo publicitario.</li>
+                    </ul>
+                </details>
+                <details>
+                    <summary><b>Términos y reembolsos</b></summary>
+                    <ul class="sum">
+                        <li>Un solo pago, sin renovaciones.</li>
+                        <li>Reembolso total durante 14 días.</li>
+                        <li>Avisamos de cambios importantes antes de que apliquen.</li>
+                    </ul>
+                </details>
+                <p style="font-size:.9rem;color:var(--mut)">Resúmenes revisados por una persona del equipo.</p>
+            </div>
         </div>
-        <svg viewBox="0 0 260 260" role="img" aria-label="Pingüino sobre un iceberg">
-            <ellipse cx="130" cy="225" rx="120" ry="26" fill="#9fd8ee" />
-            <path d="M40 215 L70 180 L190 180 L220 215Z" fill="#e5f6fc" />
-            <ellipse cx="130" cy="120" rx="62" ry="78" fill="#12203A" />
-            <ellipse cx="130" cy="136" rx="40" ry="58" fill="#F4F8FB" />
-            <circle cx="113" cy="88" r="9" fill="#fff" />
-            <circle cx="147" cy="88" r="9" fill="#fff" />
-            <circle cx="115" cy="90" r="4" fill="#12203A" />
-            <circle cx="145" cy="90" r="4" fill="#12203A" />
-            <path d="M121 102h18l-9 12z" fill="#FF8A00" />
-            <path d="M70 118Q52 155 76 172Q84 145 80 118Z" fill="#1FB5A8" />
-            <path d="M58 150q-7-7 0-12q7-5 7 4q7-9 12-2q3 7-12 16z" fill="#FF6F7D" />
-            <ellipse cx="108" cy="190" rx="18" ry="7" fill="#FF8A00" />
-            <ellipse cx="152" cy="190" rx="18" ry="7" fill="#FF8A00" />
+    </section>
+
+    <section class="hero" id="inicio" data-v="inicio">
+        <div>
+            <p class="kick">Agencia de software · equipo de 5 integrantes</p>
+            <h1>PengunLovers</h1>
+            <p class="lead">Somos usuarios que aprendimos a programar. Hacemos software que te trata como persona, no
+                como métrica.</p>
+            <div class="row"><a class="btn" href="#filosofia">Nuestra filosofía</a><a class="btn alt"
+                    href="#tienda">Conocer Pengun, nuestro juego</a></div>
+        </div>
+        <svg viewBox="0 0 240 260" role="img" aria-label="Logo: pingüino con un corazón en la aleta">
+            <ellipse cx="120" cy="236" rx="70" ry="10" fill="#12203A" opacity=".15" />
+            <ellipse cx="120" cy="140" rx="78" ry="96" fill="#12203A" />
+            <ellipse cx="120" cy="158" rx="52" ry="72" fill="#F4F8FB" />
+            <circle cx="97" cy="92" r="11" fill="#fff" />
+            <circle cx="143" cy="92" r="11" fill="#fff" />
+            <circle cx="99" cy="94" r="5" fill="#12203A" />
+            <circle cx="141" cy="94" r="5" fill="#12203A" />
+            <path d="M108 112h24l-12 18z" fill="#FF8A00" />
+            <path d="M44 140Q26 180 52 200Q60 170 58 140z" fill="#1FB5A8" />
+            <path d="M34 176q-8-8 0-14q8-6 8 4q8-10 14-2q4 8-14 18z" fill="#FF6F7D" />
+            <ellipse cx="96" cy="238" rx="20" ry="8" fill="#FF8A00" />
+            <ellipse cx="144" cy="238" rx="20" ry="8" fill="#FF8A00" />
         </svg>
     </section>
 
-    <section id="demo" data-v="inicio" style="padding-top:0">
-        <div class="stage">
-            <h2>Demo: atrapa peces</h2>
-            <p>Toca los peces que aparecen. Son 15 segundos, sin rachas ni recompensas diarias.</p>
-            <div class="cells" id="cells"></div>
-            <p class="p" id="gmsg" aria-live="polite">Puntos: 0</p><button class="btn" id="gstart">Empezar demo</button>
-        </div>
-    </section>
-
-    <section id="comprar" data-v="tienda">
-        <h2>Comprar Pengun</h2>
-        <label class="sw" style="border:1px dashed var(--warn);border-radius:12px;padding:.6rem 1rem"><input
-                type="checkbox" id="mode"> Ver cómo lo haría una tienda con patrones oscuros</label>
-        <div id="honest" class="two">
-            <div>
-                <h3>1. Elige edición</h3>
-                <label class="opt"><input type="radio" name="ed" value="199" checked> <b>Estándar, $199</b><br><span
-                        style="color:var(--mut)">El juego completo.</span></label>
-                <label class="opt"><input type="radio" name="ed" value="299"> <b>Con extras, $299</b><br><span
-                        style="color:var(--mut)">El juego completo + banda sonora y arte digital. No da ventajas dentro
-                        del juego.</span></label>
-                <h3 style="margin-top:1.2rem">2. Términos en lenguaje humano</h3>
-                <ul class="sum">
-                    <li>📦 <b>Tus datos:</b> solo los necesarios para guardar tu partida.</li>
-                    <li>💸 <b>Cobros:</b> un solo pago. Nada se renueva.</li>
-                    <li>🚪 <b>Salida:</b> reembolso en un clic y puedes borrar tus datos.</li>
-                </ul>
-                <p style="font-size:.9rem;color:var(--mut)">Lectura: 20 segundos. <button class="btn alt" id="wallbtn"
-                        style="padding:.2rem .7rem;font-size:.85rem">Ver el texto legal completo (47 min)</button></p>
-                <div class="wall hide" id="wall" tabindex="0"></div>
-            </div>
-            <div class="card">
-                <h3>3. Tu pedido</h3>
-                <table class="tot">
-                    <tr>
-                        <td>Pengun</td>
-                        <td id="t1">$199.00</td>
-                    </tr>
-                    <tr>
-                        <td>IVA</td>
-                        <td>incluido</td>
-                    </tr>
-                    <tr>
-                        <td>Cargos ocultos</td>
-                        <td>$0.00</td>
-                    </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td id="t2">$199.00</td>
-                    </tr>
-                </table>
-                <div class="row" style="margin-top:1rem"><button class="btn" id="buy">Comprar</button><button
-                        class="btn alt" id="nobuy">No comprar</button></div>
-                <p style="font-size:.9rem;color:var(--mut)">Te avisamos por correo solo del recibo. Nada más.</p>
-                <div class="hide" id="done">
-                    <p class="p">¡Gracias! Ya está en tu biblioteca. 🐧</p>
-                    <p id="rcpt" style="color:var(--mut)"></p><button class="btn alt" id="refund">Pedir reembolso (1
-                        clic)</button>
-                </div>
-            </div>
-        </div>
-        <div id="dark" class="hide">
-            <div class="bad">
-                <p class="p" style="font-size:1.2rem">Pengun Deluxe Ultra</p>
-                <p><span class="timer tag"
-                        data-i="Cuenta regresiva falsa: se reinicia al recargar para meterte presión.">⏱ ¡Oferta termina
-                        en 04:59!</span> <span class="tag"
-                        data-i="Escasez inventada: “solo quedan 2” sin ningún dato real.">Solo quedan 2 💎</span></p>
-                <p class="tag" data-i="Extras premarcados: te cobran cosas que no elegiste.">☑ Añadir 500 monedas ($149)
-                    ☑ Pase mensual ($99/mes)</p>
-                <p class="tag" data-i="Precio escondido: el total real aparece hasta el final.">Total: $0* (*ver letra
-                    pequeña)</p>
-                <button class="go tag"
-                    data-i="Botón gigante y brillante: toda la atención va a donde ellos quieren.">¡QUIERO TODO
-                    YA!</button>
-                <button class="no tag" data-i="Rechazar casi invisible: letra pequeña con color igual al fondo.">no
-                    gracias</button>
-                <p class="tag" data-i="Confirmshaming: te hacen sentir culpable por decir que no."
-                    style="font-size:.85rem;margin-top:1rem">Quien dice no, abandona a su pingüino 😢</p>
-            </div>
-            <div class="info" id="info" aria-live="polite">Toca los subrayados para ver cada truco explicado. Pasos para
-                cancelar aquí: <b>6</b>. En Pengun: <b>1</b>.</div>
-        </div>
-    </section>
-
-    <section id="nosotros" data-v="nosotros">
-        <h2>Quiénes hacemos Pengun</h2>
-        <p>PENGUN LOVESTORE es una agencia de software de 5 integrantes. <b>Software que te trata como persona, no como
-                métrica.</b></p>
+    <section id="filosofia" data-v="inicio">
+        <h2>Nuestra filosofía</h2>
+        <p class="lead">Cuál es la diferencia entre hacer dinero y hacer buen software.</p>
         <div class="grid3">
             <div class="card">
-                <h3>😤 Lo que nos frustra</h3>
-                <p>Software que amamos usado para sacarnos valor en lugar de darnos valor: quedarse con tu información
-                    porque “técnicamente aceptaste”, o diseños que empujan a gastar en lo que no necesitas.</p>
+                <h3>Lo que nos frustra</h3>
+                <p>Como usuarios informados, nos frustra ver las acciones que se toman con el software que amamos para
+                    extraer más valor de sus usuarios en vez de ofrecerles valor: desde quedarse con tu información con
+                    tu consentimiento solo por “tecnicalidad”, hasta el diseño engañoso optimizado para que gastes más
+                    en lo que no necesitas.</p>
             </div>
             <div class="card">
-                <h3>🛠️ Lo que hacemos distinto</h3>
-                <p>Somos desarrolladores, pero seguimos siendo usuarios. Construimos lo que nos gustaría encontrar:
-                    transparencia y calidad.</p>
+                <h3>Lo que hacemos distinto</h3>
+                <p>Somos desarrolladores que seguimos siendo usuarios. Queremos ofrecer la transparencia y la calidad
+                    que nosotros deseamos como usuarios.</p>
             </div>
             <div class="card">
-                <h3>💸 Ganancia sincera</h3>
-                <p>Cada peso que nos des debe ser algo que sientas que te dimos en valor.</p>
+                <h3>Ganancia sincera</h3>
+                <p>Cada peso que nos des debe ser algo que sientas que te dimos en valor, y no solo parte del proceso de
+                    usar nuestros productos.</p>
             </div>
         </div>
         <div class="quote">Hacer dinero y hacer buen software no son lo mismo. Elegimos lo segundo.</div>
@@ -744,241 +748,330 @@
         </div>
     </section>
 
-    <section id="codigo" data-v="nosotros">
+    <section id="codigo" data-v="inicio">
         <h2>El Código LSC Moderno</h2>
-        <p>Tres reglas que no negociamos, ni con inversores. Todas están aplicadas en esta tienda.</p>
+        <p>Tres reglas que no negociamos, ni con inversores.</p>
         <div class="grid3">
             <div class="card rule">
                 <h3>Honestidad</h3>
-                <p class="p">“Si no lo diríamos de frente, no va en el botón.”</p><small>Compruébalo: en la compra,
-                    “Comprar” y “No comprar” son del mismo tamaño.</small><a href="#comprar">Ir a la compra</a>
+                <p class="p">“Si no lo diríamos de frente, no va en el botón.”</p><small>Rechazar debe ser tan visible y
+                    fácil como aceptar.</small><a href="#pilares">Ver el comparador</a>
             </div>
             <div class="card rule">
                 <h3>Transparencia</h3>
-                <p class="p">“Lo importante va primero, en tu idioma y en pocas líneas.”</p><small>Compruébalo: los
-                    términos son 3 viñetas, con el texto completo disponible.</small><a href="#comprar">Ver el
-                    resumen</a>
+                <p class="p">“Lo importante va primero, en tu idioma y en pocas líneas.”</p><small>Todo documento legal
+                    lleva un resumen de 3 puntos.</small><a href="#pilares">Ver el simulador</a>
             </div>
             <div class="card rule">
                 <h3>Responsabilidad humana</h3>
-                <p class="p">“Una persona firma lo que ofrecemos. Nunca la IA.”</p><small>Compruébalo: cada uso de IA
-                    aparece con su responsable.</small><a href="#ia">Ver el registro</a>
+                <p class="p">“Una persona firma lo que ofrecemos. Nunca la IA.”</p><small>Cada uso de IA tiene un
+                    responsable y se avisa al usuario.</small><a href="#pilares">Ver el registro</a>
             </div>
         </div>
     </section>
 
-    <section id="cuenta" class="gate" data-v="gate">
-        <h2>Bienvenido a Pengun 🐧</h2>
-        <p class="lead" style="margin-bottom:1.2rem">Antes de entrar, esto es lo que necesitas saber. Puedes crear una
-            cuenta o entrar sin ella: tú decides.</p>
-        <div class="two">
-            <div class="card">
-                <div id="lform">
-                    <h3>Entrar o crear cuenta</h3>
-                    <p style="color:var(--mut)">Solo pedimos lo necesario: un correo y una contraseña. Nada de redes
-                        sociales ni teléfono.</p>
-                    <label>Correo<input id="em" type="email" autocomplete="email"></label>
-                    <label>Contraseña<input id="pw" type="password" autocomplete="current-password"></label>
-                    <label class="sw"><input type="checkbox" id="tc"> Leí el resumen y acepto los términos</label>
-                    <label class="sw"><input type="checkbox"> Quiero novedades por correo (opcional)</label>
-                    <div class="row"><button class="btn" id="login">Crear cuenta o entrar</button><button
-                            class="btn alt" id="guest">Seguir sin cuenta</button></div>
-                    <p id="lmsg" aria-live="polite" style="min-height:1.5rem;color:var(--tealx)"></p>
-                </div>
+    <section id="pilares" data-v="pilares">
+        <h2>Los 3 pilares</h2>
+        <p>Los tres dilemas que consideramos más críticos. Cada uno tiene su bloque interactivo.</p>
+        <div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" data-p="p1">Dark
+                patterns</button><button class="tab" role="tab" aria-selected="false" data-p="p2">Términos y
+                condiciones</button><button class="tab" role="tab" aria-selected="false" data-p="p3">Responsabilidad
+                ante la IA</button></div>
+
+        <div id="p1" class="pn">
+            <h3>Dark patterns o manipulación de interfaz</h3>
+            <p>Como Agencia de Software, damos prioridad a la honestidad con nuestros usuarios. Buscamos darte la
+                información que necesitas y una dirección clara hacia lo que buscas, no patrones oscuros que te atrapen
+                gastando cuando no quieres, o incluso cuando no tienes.</p>
+            <div class="tabs"><button class="tab" aria-selected="true" data-c="bad">Como lo hacen otros</button><button
+                    class="tab" aria-selected="false" data-c="good">Como lo hacemos nosotros</button></div>
+            <div id="bad" class="bad">
+                <p class="p" style="font-size:1.2rem">StreamYa Premium</p>
+                <p><span class="timer tag"
+                        data-i="Cuenta regresiva falsa: se reinicia al recargar para meterte presión.">La oferta termina
+                        en 04:59</span> <span class="tag"
+                        data-i="Escasez inventada: “solo quedan 2” sin ningún dato real.">Solo quedan 2</span></p>
+                <p class="tag" data-i="Extras premarcados: te cobran cosas que no elegiste.">[x] Añadir 500 monedas
+                    ($149) [x] Pase mensual ($99/mes)</p>
+                <p class="tag" data-i="Precio escondido: el total real aparece hasta el final.">Total: $0* (*ver letra
+                    pequeña)</p>
+                <button class="go tag"
+                    data-i="Botón gigante y brillante: toda la atención va a donde ellos quieren.">QUIERO TODO
+                    YA</button>
+                <button class="no tag" data-i="Rechazar casi invisible: letra pequeña del mismo color que el fondo.">no
+                    gracias</button>
+                <p class="tag" data-i="Confirmshaming: te hacen sentir culpable por decir que no."
+                    style="font-size:.85rem;margin-top:1rem">Quien dice no, abandona su bienestar</p>
             </div>
-            <div class="card">
-                <h3>Políticas en lenguaje humano</h3>
-                <details open>
-                    <summary><b>Privacidad</b></summary>
-                    <ul class="sum">
-                        <li>Guardamos tu correo y tu partida. Nada más.</li>
-                        <li>No vendemos ni compartimos tus datos.</li>
-                        <li>Los descargas o borras en un clic.</li>
-                    </ul>
-                </details>
-                <details>
-                    <summary><b>Cookies</b></summary>
-                    <ul class="sum">
-                        <li>Solo las necesarias para mantener tu sesión.</li>
-                        <li>Sin rastreo publicitario.</li>
-                    </ul>
-                </details>
-                <details>
-                    <summary><b>Términos y reembolsos</b></summary>
-                    <ul class="sum">
-                        <li>Un solo pago, sin renovaciones.</li>
-                        <li>Reembolso total durante 14 días.</li>
-                        <li>Te avisamos de cambios importantes antes de que apliquen.</li>
-                    </ul>
-                </details>
-                <p style="font-size:.9rem;color:var(--mut)">Resúmenes revisados por una persona del equipo.</p>
+            <div id="good" class="card good hide">
+                <p class="p" style="font-size:1.2rem">StreamYa Premium</p>
+                <p><span class="tag" data-i="Precio total visible desde el principio, sin asteriscos.">$149 al mes.
+                        Primer mes gratis, luego se cobra.</span></p>
+                <p>Te avisamos 3 días antes de cobrar.</p>
+                <div class="row"><button class="btn tag"
+                        data-i="Dos opciones del mismo tamaño y peso visual: decides tú.">Empezar gratis</button><button
+                        class="btn alt">No, gracias</button></div>
+                <p style="margin-top:1rem"><a href="#pilares" class="tag"
+                        data-i="Cancelar en un solo paso, sin pantallas escondidas.">Cancelar mi suscripción</a></p>
+            </div>
+            <div class="info" id="info" aria-live="polite">Toca los subrayados para ver cada truco explicado. Pasos para
+                cancelar: <b id="steps">6</b>.</div>
+        </div>
+
+        <div id="p2" class="pn hide">
+            <h3>Transparencia en términos y condiciones</h3>
+            <p>Continuando con nuestro enfoque en honestidad, nos dedicamos también a la transparencia y la
+                consistencia. Informamos a nuestros usuarios de los cambios importantes en lo que ofrecemos, de manera
+                que se puedan enterar incluso si no tienen todo el tiempo y la paciencia que típicamente se exige.</p>
+            <div class="two">
+                <div>
+                    <div class="wall" id="wall" tabindex="0" aria-label="Términos y condiciones completos"></div>
+                    <p style="font-size:.9rem;color:var(--mut)">Lectura estimada: 47 minutos.</p><button class="btn"
+                        id="accept">Aceptar términos y condiciones</button>
+                </div>
+                <div class="card">
+                    <p class="p">Resumen humano</p>
+                    <p id="waiting" style="color:var(--mut)">Acepta para ver qué implica de verdad.</p>
+                    <div class="hide" id="sumbox">
+                        <ul class="sum">
+                            <li><b>Qué datos tomamos y para qué:</b> solo los necesarios para que el servicio funcione.
+                            </li>
+                            <li><b>Cuándo y cuánto te cobramos:</b> precio total visible y aviso antes de renovar.</li>
+                            <li><b>Cómo te vas:</b> en un clic, y puedes borrar tus datos.</li>
+                        </ul>
+                        <p>Lectura estimada: <b>20 segundos</b>. <a href="#wall" id="full">Ver el texto legal
+                                completo</a></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-    <section id="promesa" data-v="cuenta">
-        <h2>Mi panel y la promesa al usuario</h2>
-        <div class="two">
-            <div class="card">
-                <h3>Panel de control (pruébalo)</h3>
-                <div class="sw"><input type="checkbox" id="s1"><label for="s1">Notificaciones del juego</label></div>
-                <div class="sw"><input type="checkbox" id="s2" checked><label for="s2">Recordarme descansar cada 45
-                        min</label></div>
-                <div class="sw"><input type="checkbox" id="s3"><label for="s3">Compartir datos de uso (anónimos)</label>
+
+        <div id="p3" class="pn hide">
+            <h3>Responsabilidad humana ante la IA</h3>
+            <p>La gente no confía en la inteligencia artificial generativa. Nosotros tampoco. Todo lo que ofrecemos es
+                revisado y aprobado por una persona real, y tomamos responsabilidad por lo que ofrecemos en vez de usar
+                la excusa de que fue “una alucinación”. Cualquier uso de IA se informa a nuestros usuarios, pero nunca
+                se usa sin buena razón.</p>
+            <div class="two">
+                <div class="card"><svg viewBox="0 0 260 130" role="img"
+                        aria-label="Un pingüino con lupa vigila de cerca a un robot" style="width:100%;max-width:280px">
+                        <rect x="150" y="60" width="70" height="50" rx="10" fill="#1FB5A8" />
+                        <rect x="162" y="40" width="46" height="26" rx="7" fill="#4fd8cc" />
+                        <circle cx="175" cy="53" r="4" fill="#12203A" />
+                        <circle cx="195" cy="53" r="4" fill="#12203A" />
+                        <ellipse cx="50" cy="80" rx="32" ry="46" fill="#12203A" />
+                        <ellipse cx="50" cy="92" rx="20" ry="32" fill="#F4F8FB" />
+                        <circle cx="40" cy="62" r="5" fill="#fff" />
+                        <circle cx="60" cy="62" r="5" fill="#fff" />
+                        <g class="lens">
+                            <line x1="78" y1="88" x2="98" y2="72" stroke="#FF8A00" stroke-width="5"
+                                stroke-linecap="round" />
+                            <circle cx="112" cy="62" r="20" fill="#fff" fill-opacity=".35" stroke="#FF8A00"
+                                stroke-width="5" />
+                        </g>
+                    </svg>
+                    <p class="p">Nos fijamos en lo que hace.</p>
+                    <table class="t" style="margin-top:.6rem">
+                        <tr>
+                            <th>Pieza</th>
+                            <th>IA</th>
+                            <th>Revisó</th>
+                        </tr>
+                        <tr>
+                            <td>Textos de la tienda</td>
+                            <td>Borrador</td>
+                            <td>Integrante 1</td>
+                        </tr>
+                        <tr>
+                            <td>Niveles y arte</td>
+                            <td>No</td>
+                            <td>Equipo</td>
+                        </tr>
+                        <tr>
+                            <td>Resumen de términos</td>
+                            <td>Borrador</td>
+                            <td>Integrante 2</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="row"><button class="btn alt" data-m="Tus datos se exportaron. Son tuyos.">Descargar mis
-                        datos</button><button class="btn alt" data-m="Datos borrados. Sin trámites escondidos.">Borrar
-                        mis datos</button></div>
-                <p id="pm" aria-live="polite" style="min-height:1.5rem;color:var(--tealx)">Todo viene apagado por
-                    defecto, menos el recordatorio de descanso.</p>
-            </div>
-            <div class="contract">
-                <h3>La promesa</h3>
-                <p class="p">Autonomía: tú decides</p>
-                <ul>
-                    <li>Rechazar es tan fácil como aceptar.</li>
-                    <li>Solo pedimos lo que necesitamos.</li>
-                    <li>Tus datos son tuyos y no los vendemos.</li>
-                </ul>
-                <p class="p">Dinero: sin trampas</p>
-                <ul>
-                    <li>Precio total visible. Un solo pago.</li>
-                    <li>Cancelar cuesta los mismos pasos que comprar.</li>
-                </ul>
-                <p class="p">Salud mental: sin urgencia falsa</p>
-                <ul>
-                    <li>Sin notificaciones de ansiedad, rachas ni scroll infinito.</li>
-                </ul>
-                <button class="btn" id="sign">Firmamos</button> <span class="stamp hide" id="stamp">🐧 Firmado por
-                    PENGUN LOVESTORE</span>
+                <div class="card">
+                    <p class="p">Encuentra el error en este borrador de IA:</p>
+                    <button class="claim" data-ok="0">Pengun cuesta $199 una sola vez.</button><button class="claim"
+                        data-ok="1">Tu suscripción se renueva sin avisarte.</button><button class="claim"
+                        data-ok="0">Puedes pedir reembolso en un clic.</button>
+                    <p id="aimsg" aria-live="polite" style="min-height:2.5rem">Toca la frase que rompe nuestra promesa.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="ia" data-v="ia">
-        <h2>Cómo usamos IA en Pengun</h2>
-        <p>La gente no confía en la IA generativa. Nosotros tampoco. Todo lo que ofrecemos lo revisa y aprueba una
-            persona real, y asumimos la responsabilidad en lugar de culpar a “una alucinación”.</p>
-        <div class="two">
-            <div class="card">
-                <h3>Registro público</h3>
-                <table class="t">
-                    <tr>
-                        <th>Pieza</th>
-                        <th>IA</th>
-                        <th>Revisó</th>
-                    </tr>
-                    <tr>
-                        <td>Descripción de la tienda</td>
-                        <td>Borrador</td>
-                        <td>Equipo 1</td>
-                    </tr>
-                    <tr>
-                        <td>Niveles y arte</td>
-                        <td>No</td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>Resumen de términos</td>
-                        <td>Borrador</td>
-                        <td>Equipo 2</td>
-                    </tr>
-                </table>
+    <section id="promesa" data-v="promesa">
+        <h2>La promesa al usuario</h2>
+        <p>Cómo protegemos tu autonomía, tu dinero y tu salud mental.</p>
+        <div class="contract">
+            <div class="grid3" style="margin-top:0">
+                <div>
+                    <h3>Autonomía: tú decides</h3>
+                    <ul>
+                        <li>Rechazar es tan fácil como aceptar.</li>
+                        <li>Pides o borras tus datos sin trámites escondidos.</li>
+                        <li>Solo pedimos la información que necesitamos.</li>
+                        <li>Tus datos son tuyos y no los vendemos.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Dinero: sin cargos ocultos ni trampas</h3>
+                    <ul>
+                        <li>El precio total se ve desde el principio.</li>
+                        <li>Cancelar cuesta los mismos pasos que contratar.</li>
+                        <li>Te recordamos antes de renovar.</li>
+                        <li>Sin escasez falsa ni presión de tiempo inventada.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Salud mental: sin urgencia falsa</h3>
+                    <ul>
+                        <li>Sin notificaciones diseñadas para generar ansiedad.</li>
+                        <li>Sin rachas que te obliguen a entrar.</li>
+                        <li>Sin scroll infinito para que no puedas parar.</li>
+                        <li>Puedes silenciar todo y el producto sigue funcionando.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card"><svg viewBox="0 0 260 130" role="img" aria-label="Un pingüino con lupa vigila a un robot"
-                    style="width:100%;max-width:260px">
-                    <rect x="150" y="60" width="70" height="50" rx="10" fill="#1FB5A8" />
-                    <rect x="162" y="40" width="46" height="26" rx="7" fill="#4fd8cc" />
-                    <circle cx="175" cy="53" r="4" fill="#12203A" />
-                    <circle cx="195" cy="53" r="4" fill="#12203A" />
-                    <ellipse cx="50" cy="80" rx="32" ry="46" fill="#12203A" />
-                    <ellipse cx="50" cy="92" rx="20" ry="32" fill="#F4F8FB" />
-                    <circle cx="40" cy="62" r="5" fill="#fff" />
-                    <circle cx="60" cy="62" r="5" fill="#fff" />
-                    <g class="lens">
-                        <line x1="78" y1="88" x2="98" y2="72" stroke="#FF8A00" stroke-width="5"
-                            stroke-linecap="round" />
-                        <circle cx="112" cy="62" r="20" fill="#fff" fill-opacity=".35" stroke="#FF8A00"
-                            stroke-width="5" />
-                    </g>
-                </svg>
-                <p class="p">Nos fijamos en lo que hace. Encuentra el error del borrador:</p>
-                <button class="claim" data-ok="0">Pengun cuesta $199 una sola vez.</button><button class="claim"
-                    data-ok="1">Tu suscripción se renueva sin avisarte.</button><button class="claim" data-ok="0">Puedes
-                    pedir reembolso en un clic.</button>
-                <p id="aimsg" aria-live="polite" style="min-height:2.5rem">Toca la frase que rompe nuestra promesa.</p>
+            <div style="margin-top:1rem"><button class="btn" id="sign">Firmamos</button> <span class="stamp hide"
+                    id="stamp">Firmado por PengunLovers</span></div>
+        </div>
+        <div class="card" style="margin-top:1.2rem">
+            <h3>Pruébalo: tu panel de control</h3>
+            <div class="sw"><input type="checkbox" id="s1"><label for="s1">Notificaciones del juego</label></div>
+            <div class="sw"><input type="checkbox" id="s2" checked><label for="s2">Recordarme descansar cada 45
+                    minutos</label></div>
+            <div class="sw"><input type="checkbox" id="s3"><label for="s3">Compartir datos de uso (anónimos)</label>
             </div>
+            <div class="row"><button class="btn alt" data-m="Tus datos se exportaron. Son tuyos.">Descargar mis
+                    datos</button><button class="btn alt" data-m="Datos borrados, sin trámites escondidos.">Borrar mis
+                    datos</button></div>
+            <p id="pm" aria-live="polite" style="min-height:1.5rem;color:var(--tealx)">Todo viene apagado por defecto,
+                menos el recordatorio de descanso.</p>
         </div>
     </section>
 
     <section id="crisis" data-v="crisis">
-        <h2>Transparencia: plan de acción de crisis</h2>
-        <p>Si descubrimos una vulnerabilidad crítica o un daño ambiental en nuestro código, esto hacemos. Toca cada
-            paso.</p>
+        <h2>Plan de acción de crisis</h2>
+        <p>Qué hacemos si descubrimos una vulnerabilidad crítica o un daño ambiental en nuestro código. Toca cada paso.
+        </p>
         <div class="flow" id="flow"></div>
         <div class="card" id="detail" aria-live="polite"></div>
     </section>
 
+    <section id="tienda" data-v="tienda">
+        <h2>Pengun, nuestro videojuego</h2>
+        <p class="lead">Un pingüino, un iceberg que se derrite y 40 niveles tranquilos. Un solo pago, sin micropagos,
+            sin cajas sorpresa y sin energía que se recarga.</p>
+        <div class="two">
+            <div class="stage">
+                <h3>Demo: atrapa peces</h3>
+                <p>15 segundos, sin rachas ni recompensas diarias.</p>
+                <div class="cells" id="cells"></div>
+                <p class="p" id="gmsg" aria-live="polite">Puntos: 0</p><button class="btn" id="gstart">Empezar
+                    demo</button>
+            </div>
+            <div class="card">
+                <h3>Comprar</h3>
+                <label class="opt"><input type="radio" name="ed" value="199" checked> <b>Estándar, $199</b><br><span
+                        style="color:var(--mut)">El juego completo.</span></label>
+                <label class="opt"><input type="radio" name="ed" value="299"> <b>Con extras, $299</b><br><span
+                        style="color:var(--mut)">Juego completo, banda sonora y arte digital. Sin ventajas dentro del
+                        juego.</span></label>
+                <table class="tot">
+                    <tr>
+                        <td>Pengun</td>
+                        <td id="t1">$199.00</td>
+                    </tr>
+                    <tr>
+                        <td>IVA</td>
+                        <td>incluido</td>
+                    </tr>
+                    <tr>
+                        <td>Cargos ocultos</td>
+                        <td>$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td id="t2">$199.00</td>
+                    </tr>
+                </table>
+                <div class="row" style="margin-top:1rem"><button class="btn" id="buy">Comprar</button><button
+                        class="btn alt" id="nobuy">No comprar</button></div>
+                <p style="font-size:.9rem;color:var(--mut)">Un solo pago. Reembolso en un clic durante 14 días.</p>
+                <div class="hide" id="done">
+                    <p class="p">Gracias, ya está en tu biblioteca.</p>
+                    <p id="rcpt" style="color:var(--mut)"></p><button class="btn alt" id="refund">Pedir reembolso (1
+                        clic)</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <canvas id="snow" aria-hidden="true"></canvas>
     <footer>
-        <div aria-hidden="true" style="font-size:1.5rem;letter-spacing:.5rem">❄️ 🐧 ❄️ ⛄ ❄️</div>
-        <p>🐧 PENGUN LOVESTORE · Pengun es un proyecto académico; la compra es una simulación y no se cobra nada.</p>
-        <p><button class="btn alt" id="snowbtn" style="padding:.3rem .8rem;font-size:.85rem">Pausar nieve</button></p>
+        <p>PengunLovers · Proyecto académico; la compra es una simulación y no se cobra nada.</p>
         <p>Aviso de IA: usamos IA como apoyo para redactar y programar esta página. Personas del equipo la revisaron y
             responden por ella.</p>
+        <p><button class="btn alt" id="snowbtn" style="padding:.3rem .8rem;font-size:.85rem">Pausar nieve</button></p>
     </footer>
 
     <script>
         const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-        // Demo
-        const cells = $('#cells'); for (let i = 0; i < 9; i++) {const b = document.createElement('button'); b.className = 'cell'; b.setAttribute('aria-label', 'Casilla ' + (i + 1)); cells.append(b)}
-        let pts = 0, t = 0, iv = null, fish = -1; const C = $$('.cell');
-        function spawn() {C.forEach(c => c.textContent = ''); fish = Math.floor(Math.random() * 9); C[fish].textContent = '🐟'}
-        C.forEach((c, i) => c.onclick = () => {if (iv && i === fish) {pts++; $('#gmsg').textContent = 'Puntos: ' + pts + ' · ' + t + ' s'; spawn()} });
-        $('#gstart').onclick = () => {
-            clearInterval(iv); pts = 0; t = 15; spawn(); $('#gmsg').textContent = 'Puntos: 0 · 15 s';
-            iv = setInterval(() => {t--; $('#gmsg').textContent = 'Puntos: ' + pts + ' · ' + t + ' s'; if (t <= 0) {clearInterval(iv); iv = null; C.forEach(c => c.textContent = ''); $('#gmsg').textContent = 'Fin de la demo: ' + pts + ' peces. Sin presión, la compra está cuando quieras.'} }, 1000)
-        };
-        // Compra
-        $('#wall').textContent = 'Al utilizar el Servicio, el Usuario otorga a la Compañía una licencia mundial, perpetua, irrevocable, sublicenciable y transferible respecto de cualquier dato, sin perjuicio de lo dispuesto en el apartado 14.3(b), cuya modificación podrá efectuarse unilateralmente y sin previo aviso. '.repeat(14);
-        $('#wallbtn').onclick = () => $('#wall').classList.toggle('hide');
-        const money = n => '$' + Number(n).toFixed(2);
-        $$('[name=ed]').forEach(r => r.onchange = () => {$('#t1').textContent = $('#t2').textContent = money(r.value)});
-        $('#buy').onclick = () => {const v = $('[name=ed]:checked').value; $('#done').classList.remove('hide'); $('#buy').disabled = true; $('#rcpt').textContent = 'Recibo: Pengun ' + (v === '299' ? 'con extras' : 'estándar') + ', ' + money(v) + ' MXN. Un solo pago.'};
-        $('#nobuy').onclick = () => {$('#done').classList.remove('hide'); $('#done').innerHTML = '<p class="p">Sin problema. Aquí estaremos cuando quieras. 🐧</p>'};
-        $('#refund').onclick = () => {$('#rcpt').textContent = 'Reembolso hecho: se te devolvió el 100%. Sin preguntas ni pantallas extra.'; $('#refund').classList.add('hide')};
+        // Pestañas de página
+        function go(id, quiet) { const el = document.getElementById(id); if (!el) return; const v = el.closest('section').dataset.v; $$('section[data-v]').forEach(s => s.classList.toggle('hide', s.dataset.v !== v)); $$('header a').forEach(a => { const t = document.getElementById(a.getAttribute('href').slice(1)); a.toggleAttribute('aria-current', !!t && t.closest('section').dataset.v === v) }); if (!quiet) el.scrollIntoView({ block: 'start' }); else scrollTo(0, 0) }
+        document.addEventListener('click', e => { const a = e.target.closest('a[href^="#"]'); if (a && a.getAttribute('href').length > 1) { e.preventDefault(); go(a.getAttribute('href').slice(1)) } });
+        // Sesión
+        let user = null;
+        function enter(e) { user = e || null; $('#cuenta').classList.add('hide'); $('#who').textContent = e ? 'Salir (' + e.split('@')[0] + ')' : 'Entrar'; scrollTo(0, 0) }
+        $('#login').onclick = () => { const e = $('#em').value.trim(), m = $('#lmsg'); if (!/^\S+@\S+\.\S+$/.test(e)) { m.textContent = 'Escribe un correo válido para crear tu cuenta.'; return } if (!$('#tc').checked) { m.textContent = 'Para crear la cuenta necesitamos que aceptes los términos. El resumen está a un lado.'; return } enter(e) };
+        $('#guest').onclick = () => enter('');
+        $('#who').onclick = () => { $('#cuenta').classList.remove('hide'); $('#lmsg').textContent = user ? 'Sesión cerrada.' : ''; user = null; $('#who').textContent = 'Entrar'; scrollTo(0, 0) };
+        // Pilares
+        $$('.tabs>[data-p]').forEach(t => t.onclick = () => { $$('.tabs>[data-p]').forEach(x => x.setAttribute('aria-selected', x === t)); $$('.pn').forEach(p => p.classList.toggle('hide', p.id !== t.dataset.p)) });
         const info = $('#info'), base = info.innerHTML;
-        $('#mode').onchange = e => {$('#honest').classList.toggle('hide', e.target.checked); $('#dark').classList.toggle('hide', !e.target.checked); info.innerHTML = base};
-        $$('[data-i]').forEach(e => {const s = () => info.textContent = e.dataset.i; e.addEventListener('mouseenter', s); e.addEventListener('click', s)});
-        // Panel
+        $$('[data-c]').forEach(t => t.onclick = () => { $$('[data-c]').forEach(x => x.setAttribute('aria-selected', x === t)); $('#bad').classList.toggle('hide', t.dataset.c !== 'bad'); $('#good').classList.toggle('hide', t.dataset.c !== 'good'); info.innerHTML = t.dataset.c === 'bad' ? base : 'En PengunLovers, cancelar toma <b>1</b> paso, el mismo que contratar.' });
+        $$('[data-i]').forEach(e => { const s = () => info.textContent = e.dataset.i; e.addEventListener('mouseenter', s); e.addEventListener('click', ev => { if (e.tagName === 'A') ev.preventDefault(); s() }) });
+        $('#wall').textContent = 'Al utilizar el Servicio, el Usuario otorga a la Compañía una licencia mundial, perpetua, irrevocable, sublicenciable y transferible respecto de cualquier dato, sin perjuicio de lo dispuesto en el apartado 14.3(b), cuya modificación podrá efectuarse unilateralmente y sin previo aviso. '.repeat(20);
+        $('#accept').onclick = () => { $('#waiting').classList.add('hide'); $('#sumbox').classList.remove('hide'); $('#accept').textContent = 'Aceptado (y entendido)' };
+        $('#full').onclick = e => { e.preventDefault(); $('#wall').focus(); $('#wall').scrollIntoView({ block: 'center' }) };
+        $$('.claim').forEach(b => b.onclick = () => { const m = $('#aimsg'); if (b.dataset.ok === '1') { b.classList.add('ok'); m.innerHTML = 'Error encontrado: contradice nuestra promesa. <span class="stamp">Revisado por una persona</span>' } else { b.classList.add('no'); m.textContent = 'Esa frase es correcta. Sigue buscando.' } });
+        // Promesa
+        $('#sign').onclick = () => { $('#stamp').classList.remove('hide'); $('#sign').textContent = 'Firmado' };
         $$('[data-m]').forEach(b => b.onclick = () => $('#pm').textContent = b.dataset.m);
         $$('#s1,#s2,#s3').forEach(c => c.onchange = () => $('#pm').textContent = c.checked ? 'Activado por ti. Puedes apagarlo cuando quieras.' : 'Apagado. El juego sigue funcionando igual.');
-        $('#sign').onclick = () => {$('#stamp').classList.remove('hide'); $('#sign').textContent = 'Firmado'};
-        // IA
-        $$('.claim').forEach(b => b.onclick = () => {const m = $('#aimsg'); if (b.dataset.ok === '1') {b.classList.add('ok'); m.innerHTML = 'Error encontrado: contradice nuestra promesa. <span class="stamp">Revisado por una persona</span>'} else {b.classList.add('no'); m.textContent = 'Esa frase es correcta. Sigue buscando.'} });
         // Crisis
-        const S = [['Detección', 'Cualquiera da la alerta', 'Monitoreamos fallos, reportes de usuarios e investigadores. Cualquier integrante declara una alerta sin miedo a represalias.', 'Cualquier integrante; el responsable de turno confirma', 'Menos de 2 horas', 'Ambiental: un proceso nuestro gasta energía de forma desproporcionada o genera residuos de hardware evitables.'],
+        const S = [['Detección', 'Cualquiera da la alerta', 'Monitoreamos fallos, reportes de usuarios e investigadores. Cualquier integrante declara una alerta sin miedo a represalias.', 'Cualquier integrante; el responsable de turno confirma', 'Menos de 2 horas', 'Caso ambiental: un proceso nuestro gasta energía de forma desproporcionada o genera residuos de hardware evitables.'],
         ['Contención inmediata', 'Frenamos el daño primero', 'Desactivamos la función, cerramos el acceso o reducimos el proceso dañino antes de entender todo.', 'Responsable técnico, con aprobación de otra persona', 'Primeras 24 horas', 'Primero se frena el daño, después se busca al culpable.'],
         ['Comunicación transparente', 'Te avisamos directo', 'Contamos qué pasó, a quién afecta y qué debes hacer, sin eufemismos y sin esperar a tener todas las respuestas.', 'Persona de comunicación, aprobada por el equipo', 'Máximo 72 horas', 'Qué pasó, a quién afecta, qué hacemos, qué debes hacer tú y cuándo te volvemos a informar.'],
         ['Corrección y post-mortem público', 'Publicamos nuestros errores', 'Reparamos la causa de raíz y publicamos un informe abierto con línea de tiempo, causa y cambios.', 'Todo el equipo; quien firma el informe responde por él', 'Máximo 14 días', 'Esconder un error es peor que cometerlo.']];
         const flow = $('#flow'), det = $('#detail');
-        function show(i) {$$('.step').forEach((b, j) => b.setAttribute('aria-pressed', i === j)); const s = S[i]; det.innerHTML = '<h3>' + (i + 1) + '. ' + s[0] + '</h3><p>' + s[2] + '</p><dl><dt>Quién</dt><dd>' + s[3] + '</dd><dt>Cuándo</dt><dd>' + s[4] + '</dd></dl><p style="color:var(--mut)">' + s[5] + '</p>'}
-        S.forEach((s, i) => {const b = document.createElement('button'); b.className = 'step'; b.innerHTML = (i + 1) + '. ' + s[0] + '<small>' + s[1] + '</small>'; b.onclick = () => show(i); flow.append(b)}); show(0);
-        // Pestañas
-        function go(id, quiet) {const el = document.getElementById(id); if (!el) return; const v = el.closest('section').dataset.v; $$('section[data-v]').forEach(s => s.classList.toggle('hide', s.dataset.v !== v)); $$('header a').forEach(a => {const t = document.getElementById(a.getAttribute('href').slice(1)); a.toggleAttribute('aria-current', !!t && t.closest('section').dataset.v === v)}); if (!quiet) el.scrollIntoView({block: 'start'})}
-        document.addEventListener('click', e => {const a = e.target.closest('a[href^="#"]'); if (a && a.getAttribute('href').length > 1) {e.preventDefault(); go(a.getAttribute('href').slice(1))} });
-        go('juego', 1); $('#cuenta').classList.remove('hide');
-        // Cuenta
-        $('#login').onclick = () => {const e = $('#em').value.trim(), m = $('#lmsg'); if (!/^\S+@\S+\.\S+$/.test(e)) {m.textContent = 'Escribe un correo válido para crear tu cuenta.'; return } if (!$('#tc').checked) {m.textContent = 'Para crear la cuenta necesitamos que aceptes los términos. El resumen está a un lado.'; return } enter(e)};
-        $('#guest').onclick = () => enter('');
-        let user = null;
-        function enter(e) {user = e || null; $('#cuenta').classList.add('hide'); $('#who').textContent = e ? 'Salir (' + e.split('@')[0] + ')' : 'Entrar'; scrollTo(0, 0)}
-        $('#who').onclick = () => {$('#cuenta').classList.remove('hide'); $('#lmsg').textContent = user ? 'Sesión cerrada.' : ''; user = null; $('#who').textContent = 'Entrar'; scrollTo(0, 0)};
+        function show(i) { $$('.step').forEach((b, j) => b.setAttribute('aria-pressed', i === j)); const s = S[i]; det.innerHTML = '<h3>' + (i + 1) + '. ' + s[0] + '</h3><p>' + s[2] + '</p><dl><dt>Quién</dt><dd>' + s[3] + '</dd><dt>Cuándo</dt><dd>' + s[4] + '</dd></dl><p style="color:var(--mut)">' + s[5] + '</p>' }
+        S.forEach((s, i) => { const b = document.createElement('button'); b.className = 'step'; b.innerHTML = (i + 1) + '. ' + s[0] + '<small>' + s[1] + '</small>'; b.onclick = () => show(i); flow.append(b) }); show(0);
+        // Juego y compra
+        const cells = $('#cells'); for (let i = 0; i < 9; i++) { const b = document.createElement('button'); b.className = 'cell'; b.setAttribute('aria-label', 'Casilla ' + (i + 1)); cells.append(b) }
+        let pts = 0, t = 0, iv = null, fish = -1; const C = $$('.cell');
+        function spawn() { C.forEach(c => c.textContent = ''); fish = Math.floor(Math.random() * 9); C[fish].textContent = '><>' }
+        C.forEach((c, i) => c.onclick = () => { if (iv && i === fish) { pts++; $('#gmsg').textContent = 'Puntos: ' + pts + ' · ' + t + ' s'; spawn() } });
+        $('#gstart').onclick = () => { clearInterval(iv); pts = 0; t = 15; spawn(); $('#gmsg').textContent = 'Puntos: 0 · 15 s'; iv = setInterval(() => { t--; $('#gmsg').textContent = 'Puntos: ' + pts + ' · ' + t + ' s'; if (t <= 0) { clearInterval(iv); iv = null; C.forEach(c => c.textContent = ''); $('#gmsg').textContent = 'Fin de la demo: ' + pts + ' peces. Sin presión, la compra está cuando quieras.' } }, 1000) };
+        const money = n => '$' + Number(n).toFixed(2);
+        $$('[name=ed]').forEach(r => r.onchange = () => { $('#t1').textContent = $('#t2').textContent = money(r.value) });
+        $('#buy').onclick = () => { const v = $('[name=ed]:checked').value; $('#done').classList.remove('hide'); $('#buy').disabled = true; $('#rcpt').textContent = 'Recibo: Pengun ' + (v === '299' ? 'con extras' : 'estándar') + ', ' + money(v) + ' MXN. Un solo pago.' };
+        $('#nobuy').onclick = () => { $('#done').classList.remove('hide'); $('#done').innerHTML = '<p class="p">Sin problema. Aquí estaremos cuando quieras.</p>' };
+        $('#refund').onclick = () => { $('#rcpt').textContent = 'Reembolso hecho: se te devolvió el 100%, sin preguntas ni pantallas extra.'; $('#refund').classList.add('hide') };
         // Nieve
         const cv = $('#snow'), cx = cv.getContext('2d'), rm = matchMedia('(prefers-reduced-motion:reduce)').matches; let W, H, F = [], on = true;
-        function rs() {W = cv.width = innerWidth; H = cv.height = innerHeight} rs(); addEventListener('resize', rs);
-        for (let i = 0; i < Math.min(90, Math.floor(innerWidth / 12)); i++)F.push({x: Math.random() * W, y: Math.random() * H, r: 1 + Math.random() * 3, v: .4 + Math.random(), d: Math.random() * 6});
-        function dr() {cx.clearRect(0, 0, W, H); if (!on) return; const dk = parseInt(getComputedStyle(document.body).backgroundColor.match(/\d+/)[0]) < 100; cx.fillStyle = dk ? 'rgba(255,255,255,.8)' : 'rgba(110,185,222,.75)'; F.forEach(f => {cx.beginPath(); cx.arc(f.x + Math.sin(f.d) * 12, f.y, f.r, 0, 7); cx.fill(); if (!rm) {f.y += f.v; f.d += .01; if (f.y > H + 5) {f.y = -5; f.x = Math.random() * W} } }); if (!rm) requestAnimationFrame(dr)} dr();
-        $('#snowbtn').onclick = () => {on = !on; $('#snowbtn').textContent = on ? 'Pausar nieve' : 'Activar nieve'; dr()};
+        function rs() { W = cv.width = innerWidth; H = cv.height = innerHeight } rs(); addEventListener('resize', rs);
+        for (let i = 0; i < Math.min(90, Math.floor(innerWidth / 12)); i++)F.push({ x: Math.random() * W, y: Math.random() * H, r: 1 + Math.random() * 3, v: .4 + Math.random(), d: Math.random() * 6 });
+        function dr() { cx.clearRect(0, 0, W, H); if (!on) return; const dk = parseInt(getComputedStyle(document.body).backgroundColor.match(/\d+/)[0]) < 100; cx.fillStyle = dk ? 'rgba(255,255,255,.8)' : 'rgba(110,185,222,.75)'; F.forEach(f => { cx.beginPath(); cx.arc(f.x + Math.sin(f.d) * 12, f.y, f.r, 0, 7); cx.fill(); if (!rm) { f.y += f.v; f.d += .01; if (f.y > H + 5) { f.y = -5; f.x = Math.random() * W } } }); if (!rm) requestAnimationFrame(dr) } dr();
+        $('#snowbtn').onclick = () => { on = !on; $('#snowbtn').textContent = on ? 'Pausar nieve' : 'Activar nieve'; dr() };
+        go('inicio', 1); $('#cuenta').classList.remove('hide');
     </script>
 </body>
 
