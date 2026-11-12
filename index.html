@@ -903,7 +903,7 @@
                 </div>
                 <div class="card">
                     <p class="p">Encuentra el error en este borrador de IA:</p>
-                    <button class="claim" data-ok="0">Pengun cuesta $199 una sola vez.</button><button class="claim"
+                    <button class="claim" data-ok="0">Pengun cuesta $9 una sola vez.</button><button class="claim"
                         data-ok="1">Tu suscripción se renueva sin avisarte.</button><button class="claim"
                         data-ok="0">Puedes pedir reembolso en un clic.</button>
                     <p id="aimsg" aria-live="polite" style="min-height:2.5rem">Toca la frase que rompe nuestra promesa.
@@ -985,16 +985,16 @@
                     demo</button>
             </div>
             <div class="card">
-                <h3>Comprar</h3>
-                <label class="opt"><input type="radio" name="ed" value="199" checked> <b>Estándar, $199</b><br><span
+                <h3>Comprar (simulacro de compra)</h3>
+                <label class="opt"><input type="radio" name="ed" value="9" checked> <b>Estándar, $9.00</b><br><span
                         style="color:var(--mut)">El juego completo.</span></label>
-                <label class="opt"><input type="radio" name="ed" value="299"> <b>Con extras, $299</b><br><span
+                <label class="opt"><input type="radio" name="ed" value="29"> <b>Con extras, $29.00</b><br><span
                         style="color:var(--mut)">Juego completo, banda sonora y arte digital. Sin ventajas dentro del
                         juego.</span></label>
                 <table class="tot">
                     <tr>
                         <td>Pengun</td>
-                        <td id="t1">$199.00</td>
+                        <td id="t1">$9.00</td>
                     </tr>
                     <tr>
                         <td>IVA</td>
@@ -1006,7 +1006,7 @@
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td id="t2">$199.00</td>
+                        <td id="t2">$9.00</td>
                     </tr>
                 </table>
                 <div class="row" style="margin-top:1rem"><button class="btn" id="buy">Comprar</button><button
@@ -1024,8 +1024,6 @@
     <canvas id="snow" aria-hidden="true"></canvas>
     <footer>
         <p>PengunLovers · Proyecto académico; la compra es una simulación y no se cobra nada.</p>
-        <p>Aviso de IA: usamos IA como apoyo para redactar y programar esta página. Personas del equipo la revisaron y
-            responden por ella.</p>
         <p><button class="btn alt" id="snowbtn" style="padding:.3rem .8rem;font-size:.85rem">Pausar nieve</button></p>
     </footer>
 
@@ -1069,7 +1067,7 @@
         $('#gstart').onclick = () => { clearInterval(iv); pts = 0; t = 15; spawn(); $('#gmsg').textContent = 'Puntos: 0 · 15 s'; iv = setInterval(() => { t--; $('#gmsg').textContent = 'Puntos: ' + pts + ' · ' + t + ' s'; if (t <= 0) { clearInterval(iv); iv = null; C.forEach(c => c.textContent = ''); $('#gmsg').textContent = 'Fin de la demo: ' + pts + ' peces. Sin presión, la compra está cuando quieras.' } }, 1000) };
         const money = n => '$' + Number(n).toFixed(2);
         $$('[name=ed]').forEach(r => r.onchange = () => { $('#t1').textContent = $('#t2').textContent = money(r.value) });
-        $('#buy').onclick = () => { const v = $('[name=ed]:checked').value; $('#done').classList.remove('hide'); $('#buy').disabled = true; $('#rcpt').textContent = 'Recibo: Pengun ' + (v === '299' ? 'con extras' : 'estándar') + ', ' + money(v) + ' MXN. Un solo pago.' };
+        $('#buy').onclick = () => { const v = $('[name=ed]:checked').value; $('#done').classList.remove('hide'); $('#buy').disabled = true; $('#rcpt').textContent = 'Recibo: Pengun ' + (v === '29' ? 'con extras' : 'estándar') + ', ' + money(v) + ' MXN. Un solo pago.' };
         $('#nobuy').onclick = () => { $('#done').classList.remove('hide'); $('#done').innerHTML = '<p class="p">Sin problema. Aquí estaremos cuando quieras.</p>' };
         $('#refund').onclick = () => { $('#rcpt').textContent = 'Reembolso hecho: se te devolvió el 100%, sin preguntas ni pantallas extra.'; $('#refund').classList.add('hide') };
         // Nieve
